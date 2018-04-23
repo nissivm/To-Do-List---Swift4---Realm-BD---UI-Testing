@@ -1,0 +1,22 @@
+# Uncomment the next line to define a global platform for your project
+# platform :ios, '10.0'
+
+target 'To Do List Realm' do
+    # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
+    use_frameworks!
+
+    pod 'RealmSwift'
+
+  # Pods for To Do List Realm
+
+  target 'To Do List RealmTests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
+
+  target 'To Do List RealmUITests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
+
+end
