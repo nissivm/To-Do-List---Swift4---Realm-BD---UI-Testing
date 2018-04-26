@@ -12,7 +12,6 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TasksList" customModule="To_Do_List_Realm" customModuleProvider="target">
             <connections>
-                <outlet property="addFirstTaskButton" destination="baA-Xn-luW" id="QSu-zZ-DRW"/>
                 <outlet property="tableView" destination="R6o-PN-VxK" id="Qgf-L1-cVM"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -22,38 +21,38 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <tableView hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="R6o-PN-VxK">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="R6o-PN-VxK">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="732"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <connections>
                         <outlet property="dataSource" destination="-1" id="z7m-L9-1lP"/>
                         <outlet property="delegate" destination="-1" id="PpX-rf-7XY"/>
                     </connections>
                 </tableView>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="baA-Xn-luW" userLabel="AddFirstTaskButton">
-                    <rect key="frame" x="87.333333333333314" y="383.66666666666669" width="200" height="45"/>
-                    <color key="backgroundColor" red="0.50196081400000003" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="baA-Xn-luW" userLabel="AddTaskButton">
+                    <rect key="frame" x="0.0" y="732" width="375" height="50"/>
+                    <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="200" id="U0G-u7-RG7"/>
-                        <constraint firstAttribute="height" constant="45" id="q7y-55-EzE"/>
+                        <constraint firstAttribute="height" constant="50" id="sQs-xa-9h4"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="19"/>
-                    <state key="normal" title="Add your first task!">
+                    <state key="normal" title="Add Task">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
-                        <action selector="addFirstTaskButtonTapped:" destination="-1" eventType="touchUpInside" id="oiL-8F-Rsf"/>
+                        <action selector="addTaskButtonTapped:" destination="-1" eventType="touchUpInside" id="U8j-95-Xsr"/>
                     </connections>
                 </button>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
+                <constraint firstAttribute="trailing" secondItem="baA-Xn-luW" secondAttribute="trailing" id="3j8-PG-ZBW"/>
                 <constraint firstAttribute="trailing" secondItem="R6o-PN-VxK" secondAttribute="trailing" id="4DG-xY-iFc"/>
-                <constraint firstItem="baA-Xn-luW" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="AAa-lz-FHR"/>
                 <constraint firstItem="R6o-PN-VxK" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Bo1-YK-a7f"/>
-                <constraint firstAttribute="bottom" secondItem="R6o-PN-VxK" secondAttribute="bottom" id="MHD-z8-mDT"/>
+                <constraint firstAttribute="bottom" secondItem="R6o-PN-VxK" secondAttribute="bottom" constant="80" id="MHD-z8-mDT"/>
+                <constraint firstItem="baA-Xn-luW" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Oeh-V2-9Cw"/>
                 <constraint firstItem="R6o-PN-VxK" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="Vs3-oV-HxR"/>
-                <constraint firstItem="baA-Xn-luW" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="cyu-kg-mxd"/>
+                <constraint firstItem="baA-Xn-luW" firstAttribute="top" secondItem="R6o-PN-VxK" secondAttribute="bottom" id="n7f-SX-bWG"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <point key="canvasLocation" x="25.5" y="53"/>

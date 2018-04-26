@@ -6,14 +6,15 @@
 //  Copyright © 2018 App Magic. All rights reserved.
 //
 
-import UIKit 
+import UIKit
+import RealmSwift
 
 class TasksList: UIViewController, UITableViewDelegate, UITableViewDataSource
 {
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var addFirstTaskButton: UIButton!
     
-    let tableReuseId = "TaskCell"
+    private let tableReuseId = "TaskCell"
+    private var tasks: Results<Task>?
     
     //----------------------------------------------------------------------//
     // MARK: Initialization / Deinitialization
@@ -24,16 +25,77 @@ class TasksList: UIViewController, UITableViewDelegate, UITableViewDataSource
         super.viewDidLoad()
         
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: tableReuseId)
-        addFirstTaskButton.layer.cornerRadius = 22.0
+        
+        if let realm = AppDelegate.getRealm()
+        {
+            tasks = realm.objects(Task.self)
+            tableView.reloadData()
+        }
     }
     
     //----------------------------------------------------------------------//
     // MARK: IBActions
     //----------------------------------------------------------------------//
     
-    @IBAction func addFirstTaskButtonTapped(_ sender: UIButton)
+    @IBAction func addTaskButtonTapped(_ sender: UIButton)
     {
+        let addTaskAlert = UIAlertController(title: "Enter task name:",
+                                      message: "",
+                                      preferredStyle: .alert)
         
+        addTaskAlert.addTextField
+        {
+            (textField) in
+            textField.placeholder = "Task name"
+        }
+        
+        let addAction = UIAlertAction(title: "Add", style: .default, handler:
+        {
+            [unowned self](alert) -> Void in
+            
+            let newTaskNameTxtField = addTaskAlert.textFields![0] as UITextField
+            let newTaskName = newTaskNameTxtField.text
+            
+            let cc = newTaskName != nil ? newTaskName!.count : 0
+            
+            guard cc > 0 else
+            {
+                return
+            }
+            
+            guard let realm = AppDelegate.getRealm() else
+            {
+                print("\n Could not add task: Could not instantiate Realm \n")
+                return
+            }
+            
+            let newTask = Task()
+                newTask.name = newTaskName!
+            
+            do
+            {
+                try realm.write {
+                    realm.add(newTask)
+                }
+                
+                self.tasks = realm.objects(Task.self)
+                self.tableView.reloadData()
+                
+                print("\n New task \(newTaskName!) successfully added! \n")
+            }
+            catch 
+            {
+                print("\n Could not save new task \n")
+            }
+        })
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        
+        addTaskAlert.addAction(addAction)
+        addTaskAlert.addAction(cancelAction)
+        
+        addTaskAlert.view.tintColor = UIColor.black
+        present(addTaskAlert, animated: true)
     }
     
     //----------------------------------------------------------------------//
@@ -42,7 +104,8 @@ class TasksList: UIViewController, UITableViewDelegate, UITableViewDataSource
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
     {
-        //
+        tableView.deselectRow(at: indexPath, animated: true)
+        print("\n Selected task: \(tasks![indexPath.row].name) \n")
     }
     
     //----------------------------------------------------------------------//
@@ -51,14 +114,14 @@ class TasksList: UIViewController, UITableViewDelegate, UITableViewDataSource
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
-        return 5
+        return tasks != nil ? tasks!.count : 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
         let cell = self.tableView.dequeueReusableCell(withIdentifier: tableReuseId)
         
-        cell!.textLabel?.text = "Task"
+        cell!.textLabel?.text = tasks![indexPath.row].name
         
         return cell!
     }
@@ -70,6 +133,5 @@ class TasksList: UIViewController, UITableViewDelegate, UITableViewDataSource
     override func didReceiveMemoryWarning()
     {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 }

@@ -1,5 +1,5 @@
 //
-//  TaskList.swift
+//  Task.swift
 //  To Do List Realm
 //
 //  Created by Altran Portugal Fundão Nissi on 26/04/2018.
@@ -9,8 +9,8 @@
 import Foundation
 import RealmSwift
 
-class TaskList: Object
+class Task: Object
 {
     @objc dynamic var name = ""
-    @objc dynamic var taskItems: [TaskItem] = []
+    let taskItems = List<TaskItem>()
 }
