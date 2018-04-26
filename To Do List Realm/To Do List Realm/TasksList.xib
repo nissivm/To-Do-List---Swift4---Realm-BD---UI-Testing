@@ -12,6 +12,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TasksList" customModule="To_Do_List_Realm" customModuleProvider="target">
             <connections>
+                <outlet property="tableView" destination="R6o-PN-VxK" id="Qgf-L1-cVM"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -20,7 +21,7 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="R6o-PN-VxK">
+                <tableView hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="R6o-PN-VxK">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <connections>
@@ -28,13 +29,30 @@
                         <outlet property="delegate" destination="-1" id="PpX-rf-7XY"/>
                     </connections>
                 </tableView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="baA-Xn-luW" userLabel="AddFirstTaskButton">
+                    <rect key="frame" x="87.333333333333314" y="383.66666666666669" width="200" height="45"/>
+                    <color key="backgroundColor" red="0.50196081400000003" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="200" id="U0G-u7-RG7"/>
+                        <constraint firstAttribute="height" constant="45" id="q7y-55-EzE"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="19"/>
+                    <state key="normal" title="Add your first task!">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="addFirstTaskButtonTapped:" destination="-1" eventType="touchUpInside" id="oiL-8F-Rsf"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="R6o-PN-VxK" secondAttribute="trailing" id="4DG-xY-iFc"/>
+                <constraint firstItem="baA-Xn-luW" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="AAa-lz-FHR"/>
                 <constraint firstItem="R6o-PN-VxK" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Bo1-YK-a7f"/>
                 <constraint firstAttribute="bottom" secondItem="R6o-PN-VxK" secondAttribute="bottom" id="MHD-z8-mDT"/>
                 <constraint firstItem="R6o-PN-VxK" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="Vs3-oV-HxR"/>
+                <constraint firstItem="baA-Xn-luW" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="cyu-kg-mxd"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <point key="canvasLocation" x="25.5" y="53"/>
