@@ -11,6 +11,7 @@ import UIKit
 class TasksList: UIViewController, UITableViewDelegate, UITableViewDataSource
 {
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var addFirstTaskButton: UIButton!
     
     let tableReuseId = "TaskCell"
     
@@ -23,6 +24,7 @@ class TasksList: UIViewController, UITableViewDelegate, UITableViewDataSource
         super.viewDidLoad()
         
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: tableReuseId)
+        addFirstTaskButton.layer.cornerRadius = 22.0
     }
     
     //----------------------------------------------------------------------//

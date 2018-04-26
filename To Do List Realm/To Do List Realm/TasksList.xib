@@ -12,6 +12,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TasksList" customModule="To_Do_List_Realm" customModuleProvider="target">
             <connections>
+                <outlet property="addFirstTaskButton" destination="baA-Xn-luW" id="QSu-zZ-DRW"/>
                 <outlet property="tableView" destination="R6o-PN-VxK" id="Qgf-L1-cVM"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
