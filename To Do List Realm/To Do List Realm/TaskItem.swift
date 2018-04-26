@@ -11,5 +11,6 @@ import RealmSwift
 
 class TaskItem: Object
 {
+    @objc dynamic var taskId = ""
     @objc dynamic var name = ""
 }

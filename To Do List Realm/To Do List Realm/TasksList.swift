@@ -49,13 +49,13 @@ class TasksList: UIViewController, UITableViewDelegate, UITableViewDataSource
             textField.placeholder = "Task name"
         }
         
+        let newTaskNameTxtField = addTaskAlert.textFields![0] as UITextField
+        
         let addAction = UIAlertAction(title: "Add", style: .default, handler:
         {
             [unowned self](alert) -> Void in
             
-            let newTaskNameTxtField = addTaskAlert.textFields![0] as UITextField
             let newTaskName = newTaskNameTxtField.text
-            
             let cc = newTaskName != nil ? newTaskName!.count : 0
             
             guard cc > 0 else
@@ -70,16 +70,17 @@ class TasksList: UIViewController, UITableViewDelegate, UITableViewDataSource
             }
             
             let newTask = Task()
+                newTask.taskId = NSUUID().uuidString
                 newTask.name = newTaskName!
             
             do
             {
-                try realm.write {
+                try realm.write
+                {
                     realm.add(newTask)
+                    self.tasks = realm.objects(Task.self)
+                    self.tableView.reloadData()
                 }
-                
-                self.tasks = realm.objects(Task.self)
-                self.tableView.reloadData()
                 
                 print("\n New task \(newTaskName!) successfully added! \n")
             }
@@ -95,7 +96,10 @@ class TasksList: UIViewController, UITableViewDelegate, UITableViewDataSource
         addTaskAlert.addAction(cancelAction)
         
         addTaskAlert.view.tintColor = UIColor.black
-        present(addTaskAlert, animated: true)
+        
+        present(addTaskAlert, animated: true, completion: {
+            newTaskNameTxtField.becomeFirstResponder()
+        })
     }
     
     //----------------------------------------------------------------------//
@@ -104,8 +108,14 @@ class TasksList: UIViewController, UITableViewDelegate, UITableViewDataSource
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
     {
-        tableView.deselectRow(at: indexPath, animated: true)
         print("\n Selected task: \(tasks![indexPath.row].name) \n")
+        
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+        let taskItemsList = TaskItemsList(nibName: "TaskItemsList", bundle: nil)
+            taskItemsList.task = tasks![indexPath.row]
+        
+        navigationController!.pushViewController(taskItemsList, animated: true)
     }
     
     //----------------------------------------------------------------------//
