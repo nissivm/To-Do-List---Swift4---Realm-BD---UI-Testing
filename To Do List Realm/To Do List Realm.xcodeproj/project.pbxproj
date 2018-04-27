@@ -13,12 +13,12 @@
 		6DFF211C208DC75000FF3ABB /* To_Do_List_RealmTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DFF211B208DC75000FF3ABB /* To_Do_List_RealmTests.swift */; };
 		6DFF2127208DC75000FF3ABB /* To_Do_List_RealmUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DFF2126208DC75000FF3ABB /* To_Do_List_RealmUITests.swift */; };
 		6DFF2135208DC96300FF3ABB /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 6DFF2134208DC96300FF3ABB /* Podfile */; };
-		6DFF2138208DD57B00FF3ABB /* TasksList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DFF2136208DD57B00FF3ABB /* TasksList.swift */; };
-		6DFF2139208DD57B00FF3ABB /* TasksList.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6DFF2137208DD57B00FF3ABB /* TasksList.xib */; };
-		6DFF213C208DD5A900FF3ABB /* TaskItemsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DFF213A208DD5A900FF3ABB /* TaskItemsList.swift */; };
-		6DFF213D208DD5A900FF3ABB /* TaskItemsList.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6DFF213B208DD5A900FF3ABB /* TaskItemsList.xib */; };
-		6DFF21412091BF0300FF3ABB /* TaskItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DFF21402091BF0300FF3ABB /* TaskItem.swift */; };
-		6DFF21432091CEB800FF3ABB /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DFF21422091CEB800FF3ABB /* Task.swift */; };
+		6DFF214A20922B0F00FF3ABB /* ToDoLists.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DFF214420922B0E00FF3ABB /* ToDoLists.swift */; };
+		6DFF214B20922B0F00FF3ABB /* ToDoLists.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6DFF214520922B0E00FF3ABB /* ToDoLists.xib */; };
+		6DFF214C20922B0F00FF3ABB /* ToDoListItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DFF214620922B0E00FF3ABB /* ToDoListItems.swift */; };
+		6DFF214D20922B0F00FF3ABB /* ToDoListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DFF214720922B0E00FF3ABB /* ToDoListItem.swift */; };
+		6DFF214E20922B0F00FF3ABB /* ToDoListItems.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6DFF214820922B0E00FF3ABB /* ToDoListItems.xib */; };
+		6DFF214F20922B0F00FF3ABB /* ToDoList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DFF214920922B0E00FF3ABB /* ToDoList.swift */; };
 		8AFDB6BE4A688D3BD35AD349 /* Pods_To_Do_List_RealmTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B408179CC775C226C1654F4D /* Pods_To_Do_List_RealmTests.framework */; };
 		A1199DBE5F94B7613C7269C2 /* Pods_To_Do_List_Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C22C999EC50F620A8A791DBA /* Pods_To_Do_List_Realm.framework */; };
 		E8961F2AB3BC27289223F3FE /* Pods_To_Do_List_RealmUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AA3CED9CD3820B355899711 /* Pods_To_Do_List_RealmUITests.framework */; };
@@ -57,12 +57,12 @@
 		6DFF2126208DC75000FF3ABB /* To_Do_List_RealmUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = To_Do_List_RealmUITests.swift; sourceTree = "<group>"; };
 		6DFF2128208DC75000FF3ABB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6DFF2134208DC96300FF3ABB /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = SOURCE_ROOT; };
-		6DFF2136208DD57B00FF3ABB /* TasksList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksList.swift; sourceTree = "<group>"; };
-		6DFF2137208DD57B00FF3ABB /* TasksList.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TasksList.xib; sourceTree = "<group>"; };
-		6DFF213A208DD5A900FF3ABB /* TaskItemsList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskItemsList.swift; sourceTree = "<group>"; };
-		6DFF213B208DD5A900FF3ABB /* TaskItemsList.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TaskItemsList.xib; sourceTree = "<group>"; };
-		6DFF21402091BF0300FF3ABB /* TaskItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskItem.swift; sourceTree = "<group>"; };
-		6DFF21422091CEB800FF3ABB /* Task.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
+		6DFF214420922B0E00FF3ABB /* ToDoLists.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToDoLists.swift; sourceTree = "<group>"; };
+		6DFF214520922B0E00FF3ABB /* ToDoLists.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ToDoLists.xib; sourceTree = "<group>"; };
+		6DFF214620922B0E00FF3ABB /* ToDoListItems.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToDoListItems.swift; sourceTree = "<group>"; };
+		6DFF214720922B0E00FF3ABB /* ToDoListItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToDoListItem.swift; sourceTree = "<group>"; };
+		6DFF214820922B0E00FF3ABB /* ToDoListItems.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ToDoListItems.xib; sourceTree = "<group>"; };
+		6DFF214920922B0E00FF3ABB /* ToDoList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToDoList.swift; sourceTree = "<group>"; };
 		6F0C29CDA710A6D942CFAAF8 /* Pods-To Do List RealmTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-To Do List RealmTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-To Do List RealmTests/Pods-To Do List RealmTests.debug.xcconfig"; sourceTree = "<group>"; };
 		941943C726E0C33FFACF9A98 /* Pods-To Do List RealmTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-To Do List RealmTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-To Do List RealmTests/Pods-To Do List RealmTests.release.xcconfig"; sourceTree = "<group>"; };
 		B408179CC775C226C1654F4D /* Pods_To_Do_List_RealmTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_To_Do_List_RealmTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -129,12 +129,12 @@
 				6DFF2112208DC74F00FF3ABB /* Info.plist */,
 				6DFF210F208DC74F00FF3ABB /* LaunchScreen.storyboard */,
 				6DFF2134208DC96300FF3ABB /* Podfile */,
-				6DFF21422091CEB800FF3ABB /* Task.swift */,
-				6DFF21402091BF0300FF3ABB /* TaskItem.swift */,
-				6DFF213A208DD5A900FF3ABB /* TaskItemsList.swift */,
-				6DFF213B208DD5A900FF3ABB /* TaskItemsList.xib */,
-				6DFF2136208DD57B00FF3ABB /* TasksList.swift */,
-				6DFF2137208DD57B00FF3ABB /* TasksList.xib */,
+				6DFF214920922B0E00FF3ABB /* ToDoList.swift */,
+				6DFF214720922B0E00FF3ABB /* ToDoListItem.swift */,
+				6DFF214620922B0E00FF3ABB /* ToDoListItems.swift */,
+				6DFF214820922B0E00FF3ABB /* ToDoListItems.xib */,
+				6DFF214420922B0E00FF3ABB /* ToDoLists.swift */,
+				6DFF214520922B0E00FF3ABB /* ToDoLists.xib */,
 			);
 			path = "To Do List Realm";
 			sourceTree = "<group>";
@@ -296,11 +296,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6DFF214E20922B0F00FF3ABB /* ToDoListItems.xib in Resources */,
 				6DFF2111208DC74F00FF3ABB /* LaunchScreen.storyboard in Resources */,
 				6DFF210E208DC74F00FF3ABB /* Assets.xcassets in Resources */,
-				6DFF2139208DD57B00FF3ABB /* TasksList.xib in Resources */,
 				6DFF2135208DC96300FF3ABB /* Podfile in Resources */,
-				6DFF213D208DD5A900FF3ABB /* TaskItemsList.xib in Resources */,
+				6DFF214B20922B0F00FF3ABB /* ToDoLists.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -477,11 +477,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6DFF21412091BF0300FF3ABB /* TaskItem.swift in Sources */,
-				6DFF2138208DD57B00FF3ABB /* TasksList.swift in Sources */,
-				6DFF21432091CEB800FF3ABB /* Task.swift in Sources */,
+				6DFF214C20922B0F00FF3ABB /* ToDoListItems.swift in Sources */,
 				6DFF2107208DC74F00FF3ABB /* AppDelegate.swift in Sources */,
-				6DFF213C208DD5A900FF3ABB /* TaskItemsList.swift in Sources */,
+				6DFF214F20922B0F00FF3ABB /* ToDoList.swift in Sources */,
+				6DFF214D20922B0F00FF3ABB /* ToDoListItem.swift in Sources */,
+				6DFF214A20922B0F00FF3ABB /* ToDoLists.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

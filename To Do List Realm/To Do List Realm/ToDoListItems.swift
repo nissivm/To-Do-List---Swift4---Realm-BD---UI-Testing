@@ -1,5 +1,5 @@
 //
-//  TasksList.swift
+//  ToDoListItems.swift
 //  To Do List Realm
 //
 //  Created by Altran Portugal Fundão Nissi on 23/04/2018.
@@ -9,12 +9,14 @@
 import UIKit
 import RealmSwift
 
-class TasksList: UIViewController, UITableViewDelegate, UITableViewDataSource
+class ToDoListItems: UIViewController, UITableViewDelegate, UITableViewDataSource
 {
     @IBOutlet weak var tableView: UITableView!
     
-    private let tableReuseId = "TaskCell"
-    private var tasks: Results<Task>?
+    private let tableReuseId = "ToDoListItemCell"
+    private var toDoListItems: Results<ToDoListItem>?
+    
+    var toDoList: ToDoList!
     
     //----------------------------------------------------------------------//
     // MARK: Initialization / Deinitialization
@@ -23,12 +25,13 @@ class TasksList: UIViewController, UITableViewDelegate, UITableViewDataSource
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        
+
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: tableReuseId)
         
         if let realm = AppDelegate.getRealm()
         {
-            tasks = realm.objects(Task.self)
+            let predicate = NSPredicate(format: "listId == %@", toDoList.listId)
+            toDoListItems = realm.objects(ToDoListItem.self).filter(predicate)
             tableView.reloadData()
         }
     }
@@ -37,26 +40,26 @@ class TasksList: UIViewController, UITableViewDelegate, UITableViewDataSource
     // MARK: IBActions
     //----------------------------------------------------------------------//
     
-    @IBAction func addTaskButtonTapped(_ sender: UIButton)
+    @IBAction func addToDoListItemButtonTapped(_ sender: UIButton)
     {
-        let addTaskAlert = UIAlertController(title: "Enter task name:",
-                                      message: "",
-                                      preferredStyle: .alert)
+        let addToDoListItemAlert = UIAlertController(title: "Enter item:",
+                                                     message: "",
+                                                     preferredStyle: .alert)
         
-        addTaskAlert.addTextField
+        addToDoListItemAlert.addTextField
         {
             (textField) in
-            textField.placeholder = "Task name"
+            textField.placeholder = "Item name"
         }
-        
-        let newTaskNameTxtField = addTaskAlert.textFields![0] as UITextField
         
         let addAction = UIAlertAction(title: "Add", style: .default, handler:
         {
             [unowned self](alert) -> Void in
             
-            let newTaskName = newTaskNameTxtField.text
-            let cc = newTaskName != nil ? newTaskName!.count : 0
+            let newToDoListItemNameTxtField = addToDoListItemAlert.textFields![0] as UITextField
+            let newToDoListItemName = newToDoListItemNameTxtField.text
+            
+            let cc = newToDoListItemName != nil ? newToDoListItemName!.count : 0
             
             guard cc > 0 else
             {
@@ -65,41 +68,39 @@ class TasksList: UIViewController, UITableViewDelegate, UITableViewDataSource
             
             guard let realm = AppDelegate.getRealm() else
             {
-                print("\n Could not add task: Could not instantiate Realm \n")
+                print("\n Could not add to do list item: Could not instantiate Realm \n")
                 return
             }
             
-            let newTask = Task()
-                newTask.taskId = NSUUID().uuidString
-                newTask.name = newTaskName!
+            let toDoListItem = ToDoListItem()
+                toDoListItem.listId = self.toDoList.listId
+                toDoListItem.name = newToDoListItemName!
             
             do
             {
                 try realm.write
                 {
-                    realm.add(newTask)
-                    self.tasks = realm.objects(Task.self)
+                    realm.add(toDoListItem)
+                    let predicate = NSPredicate(format: "listId == %@", self.toDoList.listId)
+                    self.toDoListItems = realm.objects(ToDoListItem.self).filter(predicate)
                     self.tableView.reloadData()
                 }
                 
-                print("\n New task \(newTaskName!) successfully added! \n")
+                print("\n New to do list item \(newToDoListItemName!) successfully added! \n")
             }
-            catch 
+            catch
             {
-                print("\n Could not save new task \n")
+                print("\n Could not save new to do list item \n")
             }
         })
         
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         
-        addTaskAlert.addAction(addAction)
-        addTaskAlert.addAction(cancelAction)
+        addToDoListItemAlert.addAction(addAction)
+        addToDoListItemAlert.addAction(cancelAction)
         
-        addTaskAlert.view.tintColor = UIColor.black
-        
-        present(addTaskAlert, animated: true, completion: {
-            newTaskNameTxtField.becomeFirstResponder()
-        })
+        addToDoListItemAlert.view.tintColor = UIColor.black
+        present(addToDoListItemAlert, animated: true)
     }
     
     //----------------------------------------------------------------------//
@@ -108,14 +109,9 @@ class TasksList: UIViewController, UITableViewDelegate, UITableViewDataSource
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
     {
-        print("\n Selected task: \(tasks![indexPath.row].name) \n")
-        
         tableView.deselectRow(at: indexPath, animated: true)
         
-        let taskItemsList = TaskItemsList(nibName: "TaskItemsList", bundle: nil)
-            taskItemsList.task = tasks![indexPath.row]
-        
-        navigationController!.pushViewController(taskItemsList, animated: true)
+        print("\n Selected to do list item: \(toDoListItems![indexPath.row].name) \n")
     }
     
     //----------------------------------------------------------------------//
@@ -124,14 +120,14 @@ class TasksList: UIViewController, UITableViewDelegate, UITableViewDataSource
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
-        return tasks != nil ? tasks!.count : 0
+        return toDoListItems != nil ? toDoListItems!.count : 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
         let cell = self.tableView.dequeueReusableCell(withIdentifier: tableReuseId)
         
-        cell!.textLabel?.text = tasks![indexPath.row].name
+        cell!.textLabel?.text = toDoListItems![indexPath.row].name
         
         return cell!
     }

@@ -10,7 +10,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TasksList" customModule="To_Do_List_Realm" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ToDoLists" customModule="To_Do_List_Realm" customModuleProvider="target">
             <connections>
                 <outlet property="tableView" destination="R6o-PN-VxK" id="Qgf-L1-cVM"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -29,18 +29,18 @@
                         <outlet property="delegate" destination="-1" id="PpX-rf-7XY"/>
                     </connections>
                 </tableView>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="baA-Xn-luW" userLabel="AddTaskButton">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="baA-Xn-luW" userLabel="AddToDoListButton">
                     <rect key="frame" x="0.0" y="732" width="375" height="50"/>
                     <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="50" id="sQs-xa-9h4"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="19"/>
-                    <state key="normal" title="Add Task">
+                    <state key="normal" title="Create To Do List">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
-                        <action selector="addTaskButtonTapped:" destination="-1" eventType="touchUpInside" id="U8j-95-Xsr"/>
+                        <action selector="addToDoListButtonTapped:" destination="-1" eventType="touchUpInside" id="HBt-A5-Xyp"/>
                     </connections>
                 </button>
             </subviews>
