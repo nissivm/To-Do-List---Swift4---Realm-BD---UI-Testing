@@ -12,6 +12,7 @@ import RealmSwift
 class ToDoLists: UIViewController, UITableViewDelegate, UITableViewDataSource
 {
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var editDoneButton: UIButton!
     
     private let tableReuseId = "ToDoListCell"
     private var toDoLists: Results<ToDoList>?
@@ -31,6 +32,18 @@ class ToDoLists: UIViewController, UITableViewDelegate, UITableViewDataSource
             toDoLists = realm.objects(ToDoList.self)
             tableView.reloadData()
         }
+        
+        editDoneButton.isEnabled = false
+        editDoneButton.alpha = 0.2
+        
+        if let toDoLi = toDoLists
+        {
+            if toDoLi.count > 0
+            {
+                editDoneButton.isEnabled = true
+                editDoneButton.alpha = 1
+            }
+        }
     }
     
     //----------------------------------------------------------------------//
@@ -47,6 +60,7 @@ class ToDoLists: UIViewController, UITableViewDelegate, UITableViewDataSource
         {
             (textField) in
             textField.placeholder = "To Do List name"
+            textField.autocapitalizationType = .sentences
         }
         
         let newToDoListNameTxtField = addToDoListAlert.textFields![0] as UITextField
@@ -102,6 +116,20 @@ class ToDoLists: UIViewController, UITableViewDelegate, UITableViewDataSource
         })
     }
     
+    @IBAction func editDoneButtonTapped(_ sender: UIButton)
+    {
+        if tableView.isEditing
+        {
+            tableView.isEditing = false
+            editDoneButton.setTitle("Edit", for: UIControlState())
+        }
+        else
+        {
+            tableView.isEditing = true
+            editDoneButton.setTitle("Done", for: UIControlState())
+        }
+    }
+    
     //----------------------------------------------------------------------//
     // MARK: UITableViewDelegate
     //----------------------------------------------------------------------//
@@ -116,6 +144,42 @@ class ToDoLists: UIViewController, UITableViewDelegate, UITableViewDataSource
             toDoListItems.toDoList = toDoLists![indexPath.row]
         
         navigationController!.pushViewController(toDoListItems, animated: true)
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath)
+    {
+        if editingStyle != .delete
+        {
+            return
+        }
+        
+        print("\n Delete this row \n")
+        
+        guard let realm = AppDelegate.getRealm() else
+        {
+            print("\n Could not delete to do list: Could not instantiate Realm \n")
+            
+            self.tableView.isEditing = false
+            editDoneButton.setTitle("Edit", for: UIControlState())
+            
+            return
+        }
+        
+        let toDoListToDelete = toDoLists![indexPath.row]
+        
+        do
+        {
+            try realm.write
+            {
+                realm.delete(toDoListToDelete)
+                toDoLists = realm.objects(ToDoList.self)
+                tableView.deleteRows(at: [indexPath], with: .automatic)
+            }
+        }
+        catch {}
+        
+        tableView.isEditing = false
+        editDoneButton.setTitle("Edit", for: UIControlState())
     }
     
     //----------------------------------------------------------------------//

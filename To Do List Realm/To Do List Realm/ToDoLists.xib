@@ -12,6 +12,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ToDoLists" customModule="To_Do_List_Realm" customModuleProvider="target">
             <connections>
+                <outlet property="editDoneButton" destination="vBS-ML-LhE" id="NU3-kS-AwO"/>
                 <outlet property="tableView" destination="R6o-PN-VxK" id="Qgf-L1-cVM"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -29,30 +30,46 @@
                         <outlet property="delegate" destination="-1" id="PpX-rf-7XY"/>
                     </connections>
                 </tableView>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="baA-Xn-luW" userLabel="AddToDoListButton">
+                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="TPc-Tb-4vt">
                     <rect key="frame" x="0.0" y="732" width="375" height="50"/>
-                    <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="baA-Xn-luW" userLabel="AddToDoListButton">
+                            <rect key="frame" x="0.0" y="0.0" width="186.66666666666666" height="50"/>
+                            <color key="backgroundColor" red="0.25098040700000002" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <fontDescription key="fontDescription" type="boldSystem" pointSize="40"/>
+                            <state key="normal" title="+">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="addToDoListButtonTapped:" destination="-1" eventType="touchUpInside" id="HBt-A5-Xyp"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vBS-ML-LhE" userLabel="EditDoneButton">
+                            <rect key="frame" x="188.66666666666663" y="0.0" width="186.33333333333337" height="50"/>
+                            <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                            <state key="normal" title="Edit">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="editDoneButtonTapped:" destination="-1" eventType="touchUpInside" id="A2t-xg-L9D"/>
+                            </connections>
+                        </button>
+                    </subviews>
                     <constraints>
-                        <constraint firstAttribute="height" constant="50" id="sQs-xa-9h4"/>
+                        <constraint firstAttribute="height" constant="50" id="KiL-f9-1jW"/>
                     </constraints>
-                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="19"/>
-                    <state key="normal" title="Create To Do List">
-                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <connections>
-                        <action selector="addToDoListButtonTapped:" destination="-1" eventType="touchUpInside" id="HBt-A5-Xyp"/>
-                    </connections>
-                </button>
+                </stackView>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstAttribute="trailing" secondItem="baA-Xn-luW" secondAttribute="trailing" id="3j8-PG-ZBW"/>
                 <constraint firstAttribute="trailing" secondItem="R6o-PN-VxK" secondAttribute="trailing" id="4DG-xY-iFc"/>
                 <constraint firstItem="R6o-PN-VxK" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Bo1-YK-a7f"/>
+                <constraint firstAttribute="trailing" secondItem="TPc-Tb-4vt" secondAttribute="trailing" id="D33-if-EaF"/>
+                <constraint firstItem="TPc-Tb-4vt" firstAttribute="top" secondItem="R6o-PN-VxK" secondAttribute="bottom" id="JEl-iL-0bu"/>
                 <constraint firstAttribute="bottom" secondItem="R6o-PN-VxK" secondAttribute="bottom" constant="80" id="MHD-z8-mDT"/>
-                <constraint firstItem="baA-Xn-luW" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Oeh-V2-9Cw"/>
                 <constraint firstItem="R6o-PN-VxK" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="Vs3-oV-HxR"/>
-                <constraint firstItem="baA-Xn-luW" firstAttribute="top" secondItem="R6o-PN-VxK" secondAttribute="bottom" id="n7f-SX-bWG"/>
+                <constraint firstItem="TPc-Tb-4vt" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="suE-Zv-XBf"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <point key="canvasLocation" x="25.5" y="53"/>
