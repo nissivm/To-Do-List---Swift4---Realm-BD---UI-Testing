@@ -21,8 +21,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate
         window!.backgroundColor = UIColor.white
         window!.makeKeyAndVisible()
         
-        let tasksList = TasksList(nibName: "TasksList", bundle: nil)
-        let navController = UINavigationController(rootViewController: tasksList)
+        let toDoLists = ToDoLists(nibName: "ToDoLists", bundle: nil)
+        let navController = UINavigationController(rootViewController: toDoLists)
         window!.rootViewController = navController
         
         return true
