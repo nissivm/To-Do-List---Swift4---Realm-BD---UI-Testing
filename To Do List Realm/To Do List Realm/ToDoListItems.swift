@@ -142,9 +142,67 @@ class ToDoListItems: UIViewController, UITableViewDelegate, UITableViewDataSourc
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
     {
+        print("\n Selected to do list item: \(toDoListItems![indexPath.row].name) \n")
+        
         tableView.deselectRow(at: indexPath, animated: true)
         
-        print("\n Selected to do list item: \(toDoListItems![indexPath.row].name) \n")
+        let toDoListItem = toDoListItems![indexPath.row]
+        
+        let alert = UIAlertController(title: "Edit item name:",
+                                      message: "",
+                                      preferredStyle: .alert)
+        
+        alert.addTextField
+        {
+            (textField) in
+            textField.placeholder = "Item name"
+            textField.text = toDoListItem.name
+            textField.autocapitalizationType = .sentences
+        }
+        
+        let editAction = UIAlertAction(title: "Edit", style: .default, handler:
+        {
+            [unowned self](alert_) -> Void in
+            
+            let textField = alert.textFields![0] as UITextField
+            
+            guard textField.text != "" else
+            {
+                return
+            }
+            
+            guard textField.text != toDoListItem.name else
+            {
+                return
+            }
+            
+            guard let realm = AppDelegate.getRealm() else
+            {
+                print("\n Could not edit to do list item: Could not instantiate Realm \n")
+                return
+            }
+            
+            do
+            {
+                try realm.write
+                {
+                    self.toDoListItems![indexPath.row].name = textField.text!
+                    self.tableView.reloadData()
+                }
+            }
+            catch
+            {
+                print("\n Could not update to do list item \n")
+            }
+        })
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        
+        alert.addAction(editAction)
+        alert.addAction(cancelAction)
+        
+        alert.view.tintColor = UIColor.black
+        present(alert, animated: true)
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath)
