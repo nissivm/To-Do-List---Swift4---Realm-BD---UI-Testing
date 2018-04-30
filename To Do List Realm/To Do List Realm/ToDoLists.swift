@@ -27,14 +27,19 @@ class ToDoLists: UIViewController, UITableViewDelegate, UITableViewDataSource
         
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: tableReuseId)
         
+        editDoneButton.isEnabled = false
+        editDoneButton.alpha = 0.2
+    }
+    
+    override func viewDidAppear(_ animated: Bool)
+    {
+        super.viewDidAppear(animated)
+        
         if let realm = AppDelegate.getRealm()
         {
             toDoLists = realm.objects(ToDoList.self)
             tableView.reloadData()
         }
-        
-        editDoneButton.isEnabled = false
-        editDoneButton.alpha = 0.2
         
         if let toDoLi = toDoLists
         {

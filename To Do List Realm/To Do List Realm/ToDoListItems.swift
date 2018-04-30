@@ -9,9 +9,10 @@
 import UIKit
 import RealmSwift
 
-class ToDoListItems: UIViewController, UITableViewDelegate, UITableViewDataSource
+class ToDoListItems: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate
 {
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var toDoListNameTextField: UITextField!
     
     private let tableReuseId = "ToDoListItemCell"
     private var toDoListItems: Results<ToDoListItem>?
@@ -25,8 +26,9 @@ class ToDoListItems: UIViewController, UITableViewDelegate, UITableViewDataSourc
     override func viewDidLoad()
     {
         super.viewDidLoad()
-
+        
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: tableReuseId)
+        toDoListNameTextField.text = toDoList.name
         
         if let realm = AppDelegate.getRealm()
         {
@@ -130,6 +132,51 @@ class ToDoListItems: UIViewController, UITableViewDelegate, UITableViewDataSourc
         cell!.textLabel?.text = toDoListItems![indexPath.row].name
         
         return cell!
+    }
+    
+    //----------------------------------------------------------------------//
+    // MARK: UITextFieldDelegate
+    //----------------------------------------------------------------------//
+    
+    func textFieldDidEndEditing(_ textField: UITextField)
+    {
+        print("\n Finished editing text field \n")
+        
+        guard textField.text != "" else
+        {
+            textField.text = toDoList.name
+            return
+        }
+        
+        guard textField.text != toDoList.name else
+        {
+            return
+        }
+        
+        guard let realm = AppDelegate.getRealm() else
+        {
+            print("\n Could not update to do list's name: Could not instantiate Realm \n")
+            textField.text = toDoList.name
+            return
+        }
+        
+        do
+        {
+            try realm.write
+            {
+                toDoList.name = textField.text!
+                return
+            }
+        }
+        catch {}
+        
+        textField.text = toDoList.name
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool
+    {
+        textField.resignFirstResponder()
+        return true
     }
     
     //----------------------------------------------------------------------//

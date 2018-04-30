@@ -13,6 +13,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ToDoListItems" customModule="To_Do_List_Realm" customModuleProvider="target">
             <connections>
                 <outlet property="tableView" destination="TQI-fn-IGL" id="ZKb-ZZ-FNo"/>
+                <outlet property="toDoListNameTextField" destination="0OC-NB-2AY" id="YUd-eB-j9q"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -21,8 +22,28 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lRj-Mo-zCP">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
+                    <subviews>
+                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="0OC-NB-2AY" userLabel="To Do List Name Text Field">
+                            <rect key="frame" x="22" y="15" width="330" height="30"/>
+                            <nil key="textColor"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="done" textContentType="name"/>
+                            <connections>
+                                <outlet property="delegate" destination="-1" id="HG1-mI-CnI"/>
+                            </connections>
+                        </textField>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="trailing" secondItem="0OC-NB-2AY" secondAttribute="trailing" constant="23" id="E3J-By-jDD"/>
+                        <constraint firstAttribute="bottom" secondItem="0OC-NB-2AY" secondAttribute="bottom" constant="15" id="gdu-R7-dIa"/>
+                        <constraint firstItem="0OC-NB-2AY" firstAttribute="leading" secondItem="lRj-Mo-zCP" secondAttribute="leading" constant="22" id="q0f-9k-L4n"/>
+                    </constraints>
+                </view>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="TQI-fn-IGL">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="732"/>
+                    <rect key="frame" x="0.0" y="60" width="375" height="672"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <connections>
                         <outlet property="dataSource" destination="-1" id="mFO-8s-rE7"/>
@@ -47,12 +68,16 @@
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="TQI-fn-IGL" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="6hq-Be-wM7"/>
-                <constraint firstItem="TQI-fn-IGL" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="Gra-vg-0EP"/>
+                <constraint firstAttribute="trailing" secondItem="lRj-Mo-zCP" secondAttribute="trailing" id="EXC-RG-XIp"/>
+                <constraint firstItem="TQI-fn-IGL" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="60" id="Gra-vg-0EP"/>
                 <constraint firstAttribute="trailing" secondItem="szA-tj-Jto" secondAttribute="trailing" id="Kaq-Vc-aD3"/>
+                <constraint firstItem="TQI-fn-IGL" firstAttribute="top" secondItem="lRj-Mo-zCP" secondAttribute="bottom" id="TcK-9b-epV"/>
                 <constraint firstAttribute="bottom" secondItem="TQI-fn-IGL" secondAttribute="bottom" constant="80" id="XpI-Aw-dIu"/>
+                <constraint firstItem="lRj-Mo-zCP" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="aYd-JH-w8w"/>
                 <constraint firstAttribute="trailing" secondItem="TQI-fn-IGL" secondAttribute="trailing" id="gG3-lG-m1f"/>
                 <constraint firstItem="szA-tj-Jto" firstAttribute="top" secondItem="TQI-fn-IGL" secondAttribute="bottom" id="nm8-gk-g1Y"/>
                 <constraint firstItem="szA-tj-Jto" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="uaC-nz-sdg"/>
+                <constraint firstItem="lRj-Mo-zCP" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="xRZ-gg-wQT"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <point key="canvasLocation" x="25.5" y="52"/>

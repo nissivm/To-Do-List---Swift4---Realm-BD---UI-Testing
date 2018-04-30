@@ -23,6 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate
         
         let toDoLists = ToDoLists(nibName: "ToDoLists", bundle: nil)
         let navController = UINavigationController(rootViewController: toDoLists)
+            navController.navigationBar.isTranslucent = false
         window!.rootViewController = navController
         
         return true
