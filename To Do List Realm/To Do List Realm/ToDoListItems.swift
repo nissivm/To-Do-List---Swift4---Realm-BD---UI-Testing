@@ -13,6 +13,7 @@ class ToDoListItems: UIViewController, UITableViewDelegate, UITableViewDataSourc
 {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var toDoListNameTextField: UITextField!
+    @IBOutlet weak var editDoneButton: UIButton!
     
     private let tableReuseId = "ToDoListItemCell"
     private var toDoListItems: Results<ToDoListItem>?
@@ -30,11 +31,23 @@ class ToDoListItems: UIViewController, UITableViewDelegate, UITableViewDataSourc
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: tableReuseId)
         toDoListNameTextField.text = toDoList.name
         
+        editDoneButton.isEnabled = false
+        editDoneButton.alpha = 0.2
+        
         if let realm = AppDelegate.getRealm()
         {
             let predicate = NSPredicate(format: "listId == %@", toDoList.listId)
             toDoListItems = realm.objects(ToDoListItem.self).filter(predicate)
             tableView.reloadData()
+        }
+        
+        if let toDoListIt = toDoListItems
+        {
+            if toDoListIt.count > 0
+            {
+                editDoneButton.isEnabled = true
+                editDoneButton.alpha = 1
+            }
         }
     }
     
@@ -52,6 +65,7 @@ class ToDoListItems: UIViewController, UITableViewDelegate, UITableViewDataSourc
         {
             (textField) in
             textField.placeholder = "Item name"
+            textField.autocapitalizationType = .sentences
         }
         
         let addAction = UIAlertAction(title: "Add", style: .default, handler:
@@ -86,6 +100,9 @@ class ToDoListItems: UIViewController, UITableViewDelegate, UITableViewDataSourc
                     let predicate = NSPredicate(format: "listId == %@", self.toDoList.listId)
                     self.toDoListItems = realm.objects(ToDoListItem.self).filter(predicate)
                     self.tableView.reloadData()
+                    
+                    self.editDoneButton.isEnabled = true
+                    self.editDoneButton.alpha = 1
                 }
                 
                 print("\n New to do list item \(newToDoListItemName!) successfully added! \n")
@@ -105,6 +122,20 @@ class ToDoListItems: UIViewController, UITableViewDelegate, UITableViewDataSourc
         present(addToDoListItemAlert, animated: true)
     }
     
+    @IBAction func editDoneButtonTapped(_ sender: UIButton)
+    {
+        if tableView.isEditing
+        {
+            tableView.isEditing = false
+            editDoneButton.setTitle("Edit", for: UIControlState())
+        }
+        else
+        {
+            tableView.isEditing = true
+            editDoneButton.setTitle("Done", for: UIControlState())
+        }
+    }
+    
     //----------------------------------------------------------------------//
     // MARK: UITableViewDelegate
     //----------------------------------------------------------------------//
@@ -114,6 +145,49 @@ class ToDoListItems: UIViewController, UITableViewDelegate, UITableViewDataSourc
         tableView.deselectRow(at: indexPath, animated: true)
         
         print("\n Selected to do list item: \(toDoListItems![indexPath.row].name) \n")
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath)
+    {
+        if editingStyle != .delete
+        {
+            return
+        }
+        
+        print("\n Delete this to do list item \n")
+        
+        guard let realm = AppDelegate.getRealm() else
+        {
+            print("\n Could not delete to do list item: Could not instantiate Realm \n")
+            
+            self.tableView.isEditing = false
+            editDoneButton.setTitle("Edit", for: UIControlState())
+            
+            return
+        }
+        
+        let toDoListItemToDelete = toDoListItems![indexPath.row]
+        
+        do
+        {
+            try realm.write
+            {
+                realm.delete(toDoListItemToDelete)
+                let predicate = NSPredicate(format: "listId == %@", toDoList.listId)
+                toDoListItems = realm.objects(ToDoListItem.self).filter(predicate)
+                tableView.deleteRows(at: [indexPath], with: .automatic)
+            }
+        }
+        catch {}
+        
+        tableView.isEditing = false
+        editDoneButton.setTitle("Edit", for: UIControlState())
+        
+        if toDoListItems!.count == 0
+        {
+            editDoneButton.isEnabled = false
+            editDoneButton.alpha = 0.2
+        }
     }
     
     //----------------------------------------------------------------------//

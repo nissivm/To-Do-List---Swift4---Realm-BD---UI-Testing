@@ -99,6 +99,9 @@ class ToDoLists: UIViewController, UITableViewDelegate, UITableViewDataSource
                     realm.add(newToDoList)
                     self.toDoLists = realm.objects(ToDoList.self)
                     self.tableView.reloadData()
+                    
+                    self.editDoneButton.isEnabled = true
+                    self.editDoneButton.alpha = 1
                 }
                 
                 print("\n New to do list \(newToDoListName!) successfully added! \n")
@@ -158,7 +161,7 @@ class ToDoLists: UIViewController, UITableViewDelegate, UITableViewDataSource
             return
         }
         
-        print("\n Delete this row \n")
+        print("\n Delete this to do list \n")
         
         guard let realm = AppDelegate.getRealm() else
         {
@@ -185,6 +188,12 @@ class ToDoLists: UIViewController, UITableViewDelegate, UITableViewDataSource
         
         tableView.isEditing = false
         editDoneButton.setTitle("Edit", for: UIControlState())
+        
+        if toDoLists!.count == 0
+        {
+            editDoneButton.isEnabled = false
+            editDoneButton.alpha = 0.2
+        }
     }
     
     //----------------------------------------------------------------------//

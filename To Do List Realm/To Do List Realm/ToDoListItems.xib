@@ -12,6 +12,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ToDoListItems" customModule="To_Do_List_Realm" customModuleProvider="target">
             <connections>
+                <outlet property="editDoneButton" destination="R3L-1A-jUs" id="Daf-7E-F3y"/>
                 <outlet property="tableView" destination="TQI-fn-IGL" id="ZKb-ZZ-FNo"/>
                 <outlet property="toDoListNameTextField" destination="0OC-NB-2AY" id="YUd-eB-j9q"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -50,34 +51,50 @@
                         <outlet property="delegate" destination="-1" id="ojP-az-evc"/>
                     </connections>
                 </tableView>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="szA-tj-Jto" userLabel="AddToDoListItemButton">
+                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="BJf-pE-cDE">
                     <rect key="frame" x="0.0" y="732" width="375" height="50"/>
-                    <color key="backgroundColor" red="0.50196081400000003" green="0.0" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8wC-qg-rjr" userLabel="AddToDoListItemButton">
+                            <rect key="frame" x="0.0" y="0.0" width="186.66666666666666" height="50"/>
+                            <color key="backgroundColor" red="0.50196081400000003" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <fontDescription key="fontDescription" type="boldSystem" pointSize="40"/>
+                            <state key="normal" title="+">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="addToDoListItemButtonTapped:" destination="-1" eventType="touchUpInside" id="vpF-Ke-7L1"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R3L-1A-jUs" userLabel="EditDoneButton">
+                            <rect key="frame" x="188.66666666666663" y="0.0" width="186.33333333333337" height="50"/>
+                            <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                            <state key="normal" title="Edit">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="editDoneButtonTapped:" destination="-1" eventType="touchUpInside" id="ctx-1J-ko0"/>
+                            </connections>
+                        </button>
+                    </subviews>
                     <constraints>
-                        <constraint firstAttribute="height" constant="50" id="hky-UJ-Ltd"/>
+                        <constraint firstAttribute="height" constant="50" id="uVc-HF-mJv"/>
                     </constraints>
-                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="19"/>
-                    <state key="normal" title="Add To Do List Item">
-                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <connections>
-                        <action selector="addToDoListItemButtonTapped:" destination="-1" eventType="touchUpInside" id="gqE-cS-3dT"/>
-                    </connections>
-                </button>
+                </stackView>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="TQI-fn-IGL" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="6hq-Be-wM7"/>
                 <constraint firstAttribute="trailing" secondItem="lRj-Mo-zCP" secondAttribute="trailing" id="EXC-RG-XIp"/>
                 <constraint firstItem="TQI-fn-IGL" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="60" id="Gra-vg-0EP"/>
-                <constraint firstAttribute="trailing" secondItem="szA-tj-Jto" secondAttribute="trailing" id="Kaq-Vc-aD3"/>
+                <constraint firstAttribute="trailing" secondItem="BJf-pE-cDE" secondAttribute="trailing" id="QnR-SV-k4c"/>
                 <constraint firstItem="TQI-fn-IGL" firstAttribute="top" secondItem="lRj-Mo-zCP" secondAttribute="bottom" id="TcK-9b-epV"/>
                 <constraint firstAttribute="bottom" secondItem="TQI-fn-IGL" secondAttribute="bottom" constant="80" id="XpI-Aw-dIu"/>
                 <constraint firstItem="lRj-Mo-zCP" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="aYd-JH-w8w"/>
+                <constraint firstItem="BJf-pE-cDE" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="bzO-1D-pis"/>
                 <constraint firstAttribute="trailing" secondItem="TQI-fn-IGL" secondAttribute="trailing" id="gG3-lG-m1f"/>
-                <constraint firstItem="szA-tj-Jto" firstAttribute="top" secondItem="TQI-fn-IGL" secondAttribute="bottom" id="nm8-gk-g1Y"/>
-                <constraint firstItem="szA-tj-Jto" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="uaC-nz-sdg"/>
                 <constraint firstItem="lRj-Mo-zCP" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="xRZ-gg-wQT"/>
+                <constraint firstItem="BJf-pE-cDE" firstAttribute="top" secondItem="TQI-fn-IGL" secondAttribute="bottom" id="xoe-Hp-gjH"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <point key="canvasLocation" x="25.5" y="52"/>
