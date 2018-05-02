@@ -74,6 +74,20 @@ class To_Do_List_RealmUITests: XCTestCase
 //        
 //    }
     
+//    func testRecordTest()
+//    {
+//        
+//        let app = app2
+//        app.tables/*@START_MENU_TOKEN@*/.staticTexts["Leroy Merlin"]/*[[".cells.staticTexts[\"Leroy Merlin\"]",".staticTexts[\"Leroy Merlin\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
+//        app.textFields["ToDoListNameTextField"].tap()
+//        
+//        let app2 = app
+//        app2/*@START_MENU_TOKEN@*/.buttons["Clear text"]/*[[".textFields[\"ToDoListNameTextField\"].buttons[\"Clear text\"]",".buttons[\"Clear text\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
+//        app2/*@START_MENU_TOKEN@*/.buttons["Done"]/*[[".keyboards",".buttons[\"Concluído\"]",".buttons[\"Done\"]"],[[[-1,2],[-1,1],[-1,0,1]],[[-1,2],[-1,1]]],[0]]@END_MENU_TOKEN@*/.tap()
+//        app.typeText("\n")
+//        
+//    }
+    
     //----------------------------------------------------------------------//
     // MARK: Creates a new To Do List
     //----------------------------------------------------------------------//
@@ -149,7 +163,22 @@ class To_Do_List_RealmUITests: XCTestCase
     
     func testEditNewToDoListName()
     {
+        let previousName = app.textFields["ToDoListNameTextField"].value as! String
+        let newName = "\(previousName)_Updated"
+        app.textFields["ToDoListNameTextField"].tap()
+        app/*@START_MENU_TOKEN@*/.buttons["Clear text"]/*[[".textFields[\"ToDoListNameTextField\"].buttons[\"Clear text\"]",".buttons[\"Clear text\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
+        app.textFields["ToDoListNameTextField"].typeText(newName)
+        app/*@START_MENU_TOKEN@*/.buttons["Done"]/*[[".keyboards",".buttons[\"Concluído\"]",".buttons[\"Done\"]"],[[[-1,2],[-1,1],[-1,0,1]],[[-1,2],[-1,1]]],[0]]@END_MENU_TOKEN@*/.tap()
         
+        app.navigationBars["To_Do_List_Realm.ToDoListItems"].buttons["Back"].tap()
+        
+        guard app.buttons["AddToDoListButton"].waitForExistence(timeout: 4) else
+        {
+            XCTFail()
+            return
+        }
+        
+        XCTAssertTrue(app.tables.cells.staticTexts[newName].exists)
     }
     
     //----------------------------------------------------------------------//
