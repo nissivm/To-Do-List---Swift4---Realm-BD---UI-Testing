@@ -31,13 +31,76 @@ class To_Do_List_RealmUITests: XCTestCase
         super.tearDown()
     }
     
+//    func testRecordTest()
+//    {
+//        let app = XCUIApplication()
+//        let enterToDoListNameAlert = app.alerts["Enter to do list name:"]
+//        let toDoListNameTextField = enterToDoListNameAlert.collectionViews.textFields["To Do List name"]
+//        toDoListNameTextField.typeText("No")
+//        toDoListNameTextField.typeText("Nov")
+//        app/*@START_MENU_TOKEN@*/.keys["a"]/*[[".keyboards.keys[\"a\"]",".keys[\"a\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
+//        toDoListNameTextField.typeText("a")
+//        
+//        let espaOKey = app/*@START_MENU_TOKEN@*/.keys["espaço"]/*[[".keyboards.keys[\"espaço\"]",".keys[\"espaço\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/
+//        espaOKey.tap()
+//        toDoListNameTextField.typeText(" ")
+//        
+//        let tKey = app/*@START_MENU_TOKEN@*/.keys["t"]/*[[".keyboards.keys[\"t\"]",".keys[\"t\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/
+//        tKey.tap()
+//        toDoListNameTextField.typeText("t")
+//        
+//        let oKey = app/*@START_MENU_TOKEN@*/.keys["o"]/*[[".keyboards.keys[\"o\"]",".keys[\"o\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/
+//        oKey.tap()
+//        toDoListNameTextField.typeText("o")
+//        espaOKey.tap()
+//        toDoListNameTextField.typeText(" ")
+//        app/*@START_MENU_TOKEN@*/.keys["d"]/*[[".keyboards.keys[\"d\"]",".keys[\"d\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
+//        toDoListNameTextField.typeText("d")
+//        oKey.tap()
+//        toDoListNameTextField.typeText("o")
+//        espaOKey.tap()
+//        toDoListNameTextField.typeText(" ")
+//        app/*@START_MENU_TOKEN@*/.keys["l"]/*[[".keyboards.keys[\"l\"]",".keys[\"l\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
+//        toDoListNameTextField.typeText("l")
+//        app/*@START_MENU_TOKEN@*/.keys["i"]/*[[".keyboards.keys[\"i\"]",".keys[\"i\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
+//        toDoListNameTextField.typeText("i")
+//        app/*@START_MENU_TOKEN@*/.keys["s"]/*[[".keyboards.keys[\"s\"]",".keys[\"s\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
+//        toDoListNameTextField.typeText("s")
+//        tKey.tap()
+//        toDoListNameTextField.typeText("t")
+//        enterToDoListNameAlert.buttons["Add"].tap()
+//        app.tables/*@START_MENU_TOKEN@*/.staticTexts["Nova to do list"]/*[[".cells.staticTexts[\"Nova to do list\"]",".staticTexts[\"Nova to do list\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
+//        app.navigationBars["To_Do_List_Realm.ToDoListItems"].buttons["Back"].tap()
+//        
+//    }
+    
     //----------------------------------------------------------------------//
     // MARK: Creates a new To Do List
     //----------------------------------------------------------------------//
     
     func testCreateNewToDoList()
     {
+        app.launch()
         
+        let addToDoListButton = app.buttons["AddToDoListButton"]
+        
+        guard addToDoListButton.waitForExistence(timeout: 4) else
+        {
+            XCTFail()
+            return
+        }
+        
+        addToDoListButton.tap()
+        
+        newToDoListName = "Test_\(UUID().uuidString)"
+        
+        let alert = app.alerts["Enter to do list name:"]
+        let textField = alert.collectionViews.textFields["To Do List name"]
+            textField.typeText(newToDoListName)
+        
+        alert.buttons["Add"].tap()
+        
+        XCTAssertTrue(app.tables.cells.staticTexts[newToDoListName].exists)
     }
     
     //----------------------------------------------------------------------//
@@ -46,7 +109,38 @@ class To_Do_List_RealmUITests: XCTestCase
     
     func testCreateNewToDoListItems()
     {
+        let lastCellIdx = app.tables.cells.count - 1
+        app.tables.cells.element(boundBy: lastCellIdx).tap()
         
+        guard app.buttons["AddToDoListItemButton"].waitForExistence(timeout: 4) else
+        {
+            XCTFail()
+            return
+        }
+        
+        createToDoListItem()
+    }
+    
+    private var counter = 0
+    
+    private func createToDoListItem()
+    {
+        app.buttons["AddToDoListItemButton"].tap()
+        
+        let newToDoListItem = "Item_\(UUID().uuidString)"
+        
+        let alert = app.alerts["Enter item:"]
+        let textField = alert.collectionViews.textFields["Item name"]
+            textField.typeText(newToDoListItem)
+        
+        alert.buttons["Add"].tap()
+        
+        counter += 1
+        
+        XCTAssertTrue(app.tables.cells.staticTexts[newToDoListItem].exists)
+        
+        if counter == 3 { counter = 0 }
+        else { createToDoListItem() }
     }
     
     //----------------------------------------------------------------------//

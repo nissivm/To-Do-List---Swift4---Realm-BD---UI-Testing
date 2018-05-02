@@ -57,6 +57,7 @@
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8wC-qg-rjr" userLabel="AddToDoListItemButton">
                             <rect key="frame" x="0.0" y="0.0" width="186.66666666666666" height="50"/>
                             <color key="backgroundColor" red="0.50196081400000003" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <accessibility key="accessibilityConfiguration" label="AddToDoListItemButton"/>
                             <fontDescription key="fontDescription" type="boldSystem" pointSize="40"/>
                             <state key="normal" title="+">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

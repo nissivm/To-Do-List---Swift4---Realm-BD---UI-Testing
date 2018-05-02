@@ -89,6 +89,8 @@ class ToDoLists: UIViewController, UITableViewDelegate, UITableViewDataSource
                 newToDoList.listId = NSUUID().uuidString
                 newToDoList.name = textField.text!
             
+            var success = false
+            
             do
             {
                 try realm.write
@@ -100,14 +102,17 @@ class ToDoLists: UIViewController, UITableViewDelegate, UITableViewDataSource
                     self.editDoneButton.isEnabled = true
                     self.editDoneButton.alpha = 1
                     
-                    print("\n New to do list \(textField.text!) successfully added! \n")
+                    success = true
                     
-                    return
+                    print("\n New to do list \(textField.text!) successfully added! \n")
                 }
             }
             catch {}
             
-            print("\n Could not save new to do list \n")
+            if !success
+            {
+                
+            }
         })
         
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
