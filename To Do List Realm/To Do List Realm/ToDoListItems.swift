@@ -57,11 +57,11 @@ class ToDoListItems: UIViewController, UITableViewDelegate, UITableViewDataSourc
     
     @IBAction func addToDoListItemButtonTapped(_ sender: UIButton)
     {
-        let addToDoListItemAlert = UIAlertController(title: "Enter item:",
-                                                     message: "",
-                                                     preferredStyle: .alert)
+        let alert = UIAlertController(title: "Enter item:",
+                                      message: "",
+                                      preferredStyle: .alert)
         
-        addToDoListItemAlert.addTextField
+        alert.addTextField
         {
             (textField) in
             textField.placeholder = "Item name"
@@ -70,14 +70,11 @@ class ToDoListItems: UIViewController, UITableViewDelegate, UITableViewDataSourc
         
         let addAction = UIAlertAction(title: "Add", style: .default, handler:
         {
-            [unowned self](alert) -> Void in
+            [unowned self](alert_) -> Void in
             
-            let newToDoListItemNameTxtField = addToDoListItemAlert.textFields![0] as UITextField
-            let newToDoListItemName = newToDoListItemNameTxtField.text
+            let textField = alert.textFields![0] as UITextField
             
-            let cc = newToDoListItemName != nil ? newToDoListItemName!.count : 0
-            
-            guard cc > 0 else
+            guard textField.text != "" else
             {
                 return
             }
@@ -90,7 +87,7 @@ class ToDoListItems: UIViewController, UITableViewDelegate, UITableViewDataSourc
             
             let toDoListItem = ToDoListItem()
                 toDoListItem.listId = self.toDoList.listId
-                toDoListItem.name = newToDoListItemName!
+                toDoListItem.name = textField.text!
             
             do
             {
@@ -103,23 +100,24 @@ class ToDoListItems: UIViewController, UITableViewDelegate, UITableViewDataSourc
                     
                     self.editDoneButton.isEnabled = true
                     self.editDoneButton.alpha = 1
+                    
+                    print("\n New to do list item \(textField.text!) successfully added! \n")
+                    
+                    return
                 }
-                
-                print("\n New to do list item \(newToDoListItemName!) successfully added! \n")
             }
-            catch
-            {
-                print("\n Could not save new to do list item \n")
-            }
+            catch {}
+            
+            print("\n Could not save new to do list item \n")
         })
         
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         
-        addToDoListItemAlert.addAction(addAction)
-        addToDoListItemAlert.addAction(cancelAction)
+        alert.addAction(addAction)
+        alert.addAction(cancelAction)
         
-        addToDoListItemAlert.view.tintColor = UIColor.black
-        present(addToDoListItemAlert, animated: true)
+        alert.view.tintColor = UIColor.black
+        present(alert, animated: true)
     }
     
     @IBAction func editDoneButtonTapped(_ sender: UIButton)
@@ -188,12 +186,15 @@ class ToDoListItems: UIViewController, UITableViewDelegate, UITableViewDataSourc
                 {
                     self.toDoListItems![indexPath.row].name = textField.text!
                     self.tableView.reloadData()
+                    
+                    print("\n Successfully edited to do list item! \n")
+                    
+                    return
                 }
             }
-            catch
-            {
-                print("\n Could not update to do list item \n")
-            }
+            catch {}
+            
+            print("\n Could not update to do list item \n")
         })
         
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
