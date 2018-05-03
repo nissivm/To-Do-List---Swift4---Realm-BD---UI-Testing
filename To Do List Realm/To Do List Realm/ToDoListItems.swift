@@ -146,7 +146,7 @@ class ToDoListItems: UIViewController, UITableViewDelegate, UITableViewDataSourc
         
         let toDoListItem = toDoListItems![indexPath.row]
         
-        let alert = UIAlertController(title: "Edit item name:",
+        let alert = UIAlertController(title: "Edit item:",
                                       message: "",
                                       preferredStyle: .alert)
         
@@ -156,6 +156,7 @@ class ToDoListItems: UIViewController, UITableViewDelegate, UITableViewDataSourc
             textField.placeholder = "Item name"
             textField.text = toDoListItem.name
             textField.autocapitalizationType = .sentences
+            textField.clearButtonMode = .always
         }
         
         let editAction = UIAlertAction(title: "Edit", style: .default, handler:
@@ -185,6 +186,10 @@ class ToDoListItems: UIViewController, UITableViewDelegate, UITableViewDataSourc
                 try realm.write
                 {
                     self.toDoListItems![indexPath.row].name = textField.text!
+                    
+                    let predicate = NSPredicate(format: "listId == %@", self.toDoList.listId)
+                    self.toDoListItems = realm.objects(ToDoListItem.self).filter(predicate)
+                    
                     self.tableView.reloadData()
                     
                     print("\n Successfully edited to do list item! \n")
