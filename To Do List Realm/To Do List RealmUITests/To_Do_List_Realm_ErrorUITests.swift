@@ -57,4 +57,45 @@ class To_Do_List_Realm_ErrorUITests: XCTestCase
         
         XCTAssertTrue(initialNumCells == finalNumCells)
     }
+    
+    //----------------------------------------------------------------------//
+    // MARK: Test creating a new To Do List item with blanc text field
+    //----------------------------------------------------------------------//
+    
+    // Test pre-condition:
+    // There must be at least one To Do List created, otherwise, test will fail.
+    
+    func testCreateNewToDoListItemWithBlancTextField()
+    {
+        app.launch()
+        
+        let firstCell = app.tables.cells.element(boundBy: 0)
+        
+        guard firstCell.waitForExistence(timeout: 4) else
+        {
+            XCTFail()
+            return
+        }
+        
+        firstCell.tap()
+        
+        let addToDoListItemButton = app.buttons["AddToDoListItemButton"]
+        
+        guard addToDoListItemButton.waitForExistence(timeout: 4) else
+        {
+            XCTFail()
+            return
+        }
+        
+        addToDoListItemButton.tap()
+        
+        let initialNumCells = app.tables.cells.count
+        
+        let alert = app.alerts["Enter item:"]
+            alert.buttons["Add"].tap()
+        
+        let finalNumCells = app.tables.cells.count
+        
+        XCTAssertTrue(initialNumCells == finalNumCells)
+    }
 }
