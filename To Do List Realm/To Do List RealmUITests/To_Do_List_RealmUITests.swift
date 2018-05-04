@@ -30,11 +30,6 @@ class To_Do_List_RealmUITests: XCTestCase
         super.tearDown()
     }
     
-    func testRecordTest()
-    {
-        
-    }
-    
     //----------------------------------------------------------------------//
     // MARK: Test creating a new To Do List
     //----------------------------------------------------------------------//
@@ -139,8 +134,6 @@ class To_Do_List_RealmUITests: XCTestCase
         app.tables.buttons.element(boundBy: lastIdx).tap()
         app.tables.buttons["Delete"].tap()
         
-        sleep(3)
-        
         let finalNumCells = app.tables.cells.count
         
         XCTAssertTrue(initialNumCells > finalNumCells)
@@ -176,6 +169,16 @@ class To_Do_List_RealmUITests: XCTestCase
     
     func test06_DeleteToDoList()
     {
+        app.buttons["EditDoneButton"].tap()
         
+        let initialNumCells = app.tables.cells.count
+        
+        let lastIdx = app.tables.cells.count - 1
+        app.tables.buttons.element(boundBy: lastIdx).tap()
+        app.tables.buttons["Delete"].tap()
+        
+        let finalNumCells = app.tables.cells.count
+        
+        XCTAssertTrue(initialNumCells > finalNumCells)
     }
 }
