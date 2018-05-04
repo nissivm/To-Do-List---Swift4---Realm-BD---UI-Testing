@@ -175,4 +175,78 @@ class To_Do_List_Realm_ErrorUITests: XCTestCase
         
         XCTAssertTrue(app.tables.cells.staticTexts[originalText].exists)
     }
+    
+    //----------------------------------------------------------------------//
+    // MARK: Test editing a To Do List name with blanc text field
+    //----------------------------------------------------------------------//
+    
+    // Test pre-condition:
+    // There must be at least one To Do List created, otherwise, test will fail.
+    
+    func testEditToDoListNameWithBlancTextField()
+    {
+        app.launch()
+        
+        let firstCell = app.tables.cells.element(boundBy: 0)
+        
+        guard firstCell.waitForExistence(timeout: 4) else
+        {
+            XCTFail()
+            return
+        }
+        
+        firstCell.tap()
+        
+        guard app.buttons["AddToDoListItemButton"].waitForExistence(timeout: 4) else
+        {
+            XCTFail()
+            return
+        }
+        
+        let textField = app.textFields["ToDoListNameTextField"]
+        let originalText = textField.value as! String
+        textField.tap()
+        
+        app/*@START_MENU_TOKEN@*/.buttons["Clear text"]/*[[".textFields[\"ToDoListNameTextField\"].buttons[\"Clear text\"]",".buttons[\"Clear text\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
+        app/*@START_MENU_TOKEN@*/.buttons["Done"]/*[[".keyboards",".buttons[\"Concluído\"]",".buttons[\"Done\"]"],[[[-1,2],[-1,1],[-1,0,1]],[[-1,2],[-1,1]]],[0]]@END_MENU_TOKEN@*/.tap()
+        
+        let editedText = textField.value as! String
+        
+        XCTAssertEqual(originalText, editedText)
+    }
+    
+    //----------------------------------------------------------------------//
+    // MARK: Test editing a To Do List name with same text
+    //----------------------------------------------------------------------//
+    
+    func testEditToDoListNameWithSameText()
+    {
+        app.launch()
+        
+        let firstCell = app.tables.cells.element(boundBy: 0)
+        
+        guard firstCell.waitForExistence(timeout: 4) else
+        {
+            XCTFail()
+            return
+        }
+        
+        firstCell.tap()
+        
+        guard app.buttons["AddToDoListItemButton"].waitForExistence(timeout: 4) else
+        {
+            XCTFail()
+            return
+        }
+        
+        let textField = app.textFields["ToDoListNameTextField"]
+        let originalText = textField.value as! String
+        textField.tap()
+        
+        app/*@START_MENU_TOKEN@*/.buttons["Done"]/*[[".keyboards",".buttons[\"Concluído\"]",".buttons[\"Done\"]"],[[[-1,2],[-1,1],[-1,0,1]],[[-1,2],[-1,1]]],[0]]@END_MENU_TOKEN@*/.tap()
+        
+        let editedText = textField.value as! String
+        
+        XCTAssertEqual(originalText, editedText)
+    }
 }
