@@ -89,6 +89,8 @@ class ToDoListItems: UIViewController, UITableViewDelegate, UITableViewDataSourc
                 toDoListItem.listId = self.toDoList.listId
                 toDoListItem.name = textField.text!
             
+            var success = false
+            
             do
             {
                 try realm.write
@@ -101,14 +103,17 @@ class ToDoListItems: UIViewController, UITableViewDelegate, UITableViewDataSourc
                     self.editDoneButton.isEnabled = true
                     self.editDoneButton.alpha = 1
                     
-                    print("\n New to do list item \(textField.text!) successfully added! \n")
+                    success = true
                     
-                    return
+                    print("\n New to do list item \(textField.text!) successfully added! \n")
                 }
             }
             catch {}
             
-            print("\n Could not save new to do list item \n")
+            if !success
+            {
+                print("\n Could not add new to do list item \n")
+            }
         })
         
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
@@ -231,6 +236,7 @@ class ToDoListItems: UIViewController, UITableViewDelegate, UITableViewDataSourc
         }
         
         let toDoListItemToDelete = toDoListItems![indexPath.row]
+        var success = false
         
         do
         {
@@ -240,12 +246,21 @@ class ToDoListItems: UIViewController, UITableViewDelegate, UITableViewDataSourc
                 let predicate = NSPredicate(format: "listId == %@", toDoList.listId)
                 toDoListItems = realm.objects(ToDoListItem.self).filter(predicate)
                 tableView.deleteRows(at: [indexPath], with: .automatic)
+                
+                success = true
+                
+                print("\n Successfully deleted to do list item! \n")
             }
         }
         catch {}
         
         tableView.isEditing = false
         editDoneButton.setTitle("Edit", for: UIControlState())
+        
+        if !success
+        {
+            print("\n Could not delete to do list item \n")
+        }
         
         if toDoListItems!.count == 0
         {
@@ -298,15 +313,25 @@ class ToDoListItems: UIViewController, UITableViewDelegate, UITableViewDataSourc
             return
         }
         
+        var success = false
+        
         do
         {
             try realm.write
             {
                 toDoList.name = textField.text!
-                return
+                
+                success = true
+                
+                print("\n Successfully updated to do list name! \n")
             }
         }
         catch {}
+        
+        if !success
+        {
+            print("\n Could not update to do list name \n")
+        }
         
         textField.text = toDoList.name
     }

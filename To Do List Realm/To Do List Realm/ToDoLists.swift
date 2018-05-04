@@ -111,7 +111,7 @@ class ToDoLists: UIViewController, UITableViewDelegate, UITableViewDataSource
             
             if !success
             {
-                
+                print("\n Could not add new to do list \n")
             }
         })
         
@@ -161,8 +161,6 @@ class ToDoLists: UIViewController, UITableViewDelegate, UITableViewDataSource
             return
         }
         
-        print("\n Delete this to do list \n")
-        
         guard let realm = AppDelegate.getRealm() else
         {
             print("\n Could not delete to do list: Could not instantiate Realm \n")
@@ -174,6 +172,7 @@ class ToDoLists: UIViewController, UITableViewDelegate, UITableViewDataSource
         }
         
         let toDoListToDelete = toDoLists![indexPath.row]
+        var success = false
         
         do
         {
@@ -182,12 +181,21 @@ class ToDoLists: UIViewController, UITableViewDelegate, UITableViewDataSource
                 realm.delete(toDoListToDelete)
                 toDoLists = realm.objects(ToDoList.self)
                 tableView.deleteRows(at: [indexPath], with: .automatic)
+                
+                success = true
+                
+                print("\n Successfully deleted to do list! \n")
             }
         }
         catch {}
         
         tableView.isEditing = false
         editDoneButton.setTitle("Edit", for: UIControlState())
+        
+        if !success
+        {
+            print("\n Could not delete to do list \n")
+        }
         
         if toDoLists!.count == 0
         {
