@@ -30,22 +30,16 @@ class To_Do_List_RealmUITests: XCTestCase
         super.tearDown()
     }
     
-//    func testRecordTest()
-//    {
-//        
-//        let app = XCUIApplication()
-//        let tablesQuery = app.tables
-//        tablesQuery/*@START_MENU_TOKEN@*/.staticTexts["Test_1F4B1C56-55FD-4932-B230-E2E4A74328AA_Updated"]/*[[".cells.staticTexts[\"Test_1F4B1C56-55FD-4932-B230-E2E4A74328AA_Updated\"]",".staticTexts[\"Test_1F4B1C56-55FD-4932-B230-E2E4A74328AA_Updated\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
-//        tablesQuery/*@START_MENU_TOKEN@*/.staticTexts["Item_57652D37-9359-4B65-B400-FD7B3E650437"]/*[[".cells.staticTexts[\"Item_57652D37-9359-4B65-B400-FD7B3E650437\"]",".staticTexts[\"Item_57652D37-9359-4B65-B400-FD7B3E650437\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
-//        app.alerts["Edit item name:"].collectionViews/*@START_MENU_TOKEN@*/.buttons["Clear text"]/*[[".textFields[\"Item name\"].buttons[\"Clear text\"]",".buttons[\"Clear text\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
-//        
-//    }
+    func testRecordTest()
+    {
+        
+    }
     
     //----------------------------------------------------------------------//
     // MARK: Test creating a new To Do List
     //----------------------------------------------------------------------//
     
-    func testCreateNewToDoList()
+    func test01_CreateNewToDoList()
     {
         app.launch()
         
@@ -74,7 +68,7 @@ class To_Do_List_RealmUITests: XCTestCase
     // MARK: Test creating a new To Do List item
     //----------------------------------------------------------------------//
     
-    func testCreateNewToDoListItem()
+    func test02_CreateNewToDoListItem()
     {
         let lastCellIdx = app.tables.cells.count - 1
         app.tables.cells.element(boundBy: lastCellIdx).tap()
@@ -114,7 +108,7 @@ class To_Do_List_RealmUITests: XCTestCase
     // MARK: Test editing To Do List Item
     //----------------------------------------------------------------------//
     
-    func testEditToDoListItem()
+    func test03_EditToDoListItem()
     {
         let newName = "Updated_Item_\(UUID().uuidString)"
         
@@ -135,16 +129,28 @@ class To_Do_List_RealmUITests: XCTestCase
     // MARK: Test deleting To Do List Item
     //----------------------------------------------------------------------//
     
-    func testDeleteToDoListItem()
+    func test04_DeleteToDoListItem()
     {
+        app.buttons["EditDoneButton_"].tap()
         
+        let initialNumCells = app.tables.cells.count
+        
+        let lastIdx = app.tables.cells.count - 1
+        app.tables.buttons.element(boundBy: lastIdx).tap()
+        app.tables.buttons["Delete"].tap()
+        
+        sleep(3)
+        
+        let finalNumCells = app.tables.cells.count
+        
+        XCTAssertTrue(initialNumCells > finalNumCells)
     }
     
     //----------------------------------------------------------------------//
     // MARK: Test editing To Do List name
     //----------------------------------------------------------------------//
     
-    func testEditToDoListName()
+    func test05_EditToDoListName()
     {
         let newName = "Updated_ToDoList_\(UUID().uuidString)"
         
@@ -168,7 +174,7 @@ class To_Do_List_RealmUITests: XCTestCase
     // MARK: Deletes To Do List
     //----------------------------------------------------------------------//
     
-    func testDeleteToDoList()
+    func test06_DeleteToDoList()
     {
         
     }
