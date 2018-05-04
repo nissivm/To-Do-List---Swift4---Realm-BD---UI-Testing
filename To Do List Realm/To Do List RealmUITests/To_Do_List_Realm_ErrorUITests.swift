@@ -5,6 +5,7 @@
 //  Created by Altran Portugal Fundão Nissi on 04/05/2018.
 //  Copyright © 2018 App Magic. All rights reserved.
 //
+// NOTE: Tests in this class are supposed to be done one by one.
 
 import XCTest
 
